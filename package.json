@@ -1,0 +1,16 @@
+{
+  "name": "TouchPoint.js",
+  "version": "1.0.0 Beta",
+  "description": "A JavaScript library that visually shows taps/cicks on HTML prototypes",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Jonah Bitautas",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "http://jonahvsweb.com"
+}

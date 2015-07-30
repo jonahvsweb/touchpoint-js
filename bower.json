@@ -1,0 +1,24 @@
+{
+  "name": "touchpoint",
+  "description": "Visually show taps/cicks on HTML prototypes.",
+  "main": "touchpoint.js",
+  "homepage": "http://jonahvsweb.com",
+  "license": "MIT",
+  "authors": [
+    "Jonah Bitautas <jonahvsweb@gmail.com>"
+  ],
+  "keywords": [
+    "touchpoint",
+    "touchpointjs",
+    "tap",
+    "mobile",
+    "prototype",
+    "prototyping"
+  ],
+  "ignore": [
+    "index.html",
+    "AUTHORS.txt",
+    "Gruntfile.js",
+    "package.json"
+  ]
+}
