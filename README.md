@@ -31,7 +31,9 @@ After you load the script you simply initialize TouchPoint and add an event list
 TouchPoint is customizable. There are a number of options that you have access to to customize the look for your needs. It's important that these options be defined before you initialize TouchPoint with `TouchPoint.init()`. Otherwise, your updates won't show.
 
 #### Color
-Change the default color of TouchPoint. Any valid CSS color can be used. Default: '#FFF'
+Change the default color of TouchPoint. Any valid CSS color can be used. 
+
+Default value: `'#FFF'`
 ```html
 TouchPoint.color = 'red';
 ```
@@ -39,7 +41,7 @@ TouchPoint.color = 'red';
 #### Element
 Change the kind of HTML element that TouchPoint creates. 
 
-Default: 'div'
+Default value: `'div'`
 ```html
 TouchPoint.el = 'span';
 ```
@@ -47,7 +49,7 @@ TouchPoint.el = 'span';
 #### Opacity
 Change the opacity of the TouchPoint. You can use any value between `0` and `1`. 
 
-Default: '0.8'
+Default value: `0.8`
 ```html
 TouchPoint.opacity = 0.5;
 ```
@@ -55,7 +57,7 @@ TouchPoint.opacity = 0.5;
 #### Scale
 Change the final scale of the TouchPoint. This value can range from `0` and beyond. 
 
-Default: '8'
+Default value: `8`
 ```html
 TouchPoint.scale = 14;
 ```
@@ -63,7 +65,7 @@ TouchPoint.scale = 14;
 #### Size
 Change the initial size of the TouchPoint. This value is `px`. 
 
-Default: '20'
+Default value: `20`
 ```html
 TouchPoint.size = 5;
 ```
@@ -71,7 +73,7 @@ TouchPoint.size = 5;
 #### zIndex
 Change the zIndex of the TouchPoint. By default it's set at the highest `z-index` depth possible, but you may find the need to change it based on your own prototype. 
 
-Default: '9999'
+Default value: `9999`
 ```html
 TouchPoint.z = 500;
 ```
