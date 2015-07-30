@@ -14,7 +14,7 @@ Download and include `touchpoint.js` or `touchpoint.min.js` in the `<head>` or a
 ```
 
 ## Quick Start/How to Use
-After you load the script you simply initialize TouchPoint and add an event listener to whatever element you want TouchPoint to show over: 
+After you load the script you simply initialize TouchPoint and add an event listener to whichever DOM element you want TouchPoint to show over: 
 
 ```html
 <script>
@@ -57,7 +57,7 @@ Change the final scale of the TouchPoint. This value can range from `0` and beyo
 
 Default: '8'
 ```html
-TouchPoint.size = 14;
+TouchPoint.scale = 14;
 ```
 
 #### Size
@@ -75,6 +75,9 @@ Default: '9999'
 ```html
 TouchPoint.z = 500;
 ```
+
+## Performance
+Performance should not be an issue because each individual TouchPoint element is dynamically created and then automatically removed from the DOM after being used.
 
 ## Release Notes
 **TouchPoint.js 1.0 Beta**   
