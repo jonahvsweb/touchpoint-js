@@ -4,7 +4,7 @@ A tiny vanilla JavaScript library made for in-browser HTML prototyping (as part 
 
 ![TouchPoint.js in action](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/touchpoint-js.gif "TouchPoint.js in action")
 
-**See a simple live demo: [codepen.io/jonahvsweb/full/bdQmpd/](http://codepen.io/jonahvsweb/full/bdQmpd/)**
+**Live demo: [codepen.io/jonahvsweb/full/bdQmpd/](http://codepen.io/jonahvsweb/full/bdQmpd/)**
 
 ## Installation
 Download and include `touchpoint.js` or `touchpoint.min.js` in the `<head>` or at the end of the `<body>` (recommended) in your HTML document. There are no dependencies:
@@ -30,48 +30,48 @@ After you load the script you simply initialize TouchPoint and add an event list
 ## Options
 TouchPoint is customizable. There are a number of options that you have access to to customize the look for your needs. It's important that these options be defined before you initialize TouchPoint with `TouchPoint.init()`. Otherwise, your updates won't show.
 
-### Color
-Change the default color of TouchPoint. Any valid CSS color can be used. Default: '#FFF'.
+#### Color
+Change the default color of TouchPoint. Any valid CSS color can be used. Default: '#FFF'
 ```html
 TouchPoint.color = 'red';
 ```
 
-### Element
+#### Element
 Change the kind of HTML element that TouchPoint creates. 
 
-Default: 'div'.
+Default: 'div'
 ```html
 TouchPoint.el = 'span';
 ```
 
-### Opacity
+#### Opacity
 Change the opacity of the TouchPoint. You can use any value between `0` and `1`. 
 
-Default: '0.8'.
+Default: '0.8'
 ```html
 TouchPoint.opacity = 0.5;
 ```
 
-### Scale
+#### Scale
 Change the final scale of the TouchPoint. This value can range from `0` and beyond. 
 
-Default: '8'.
+Default: '8'
 ```html
-TouchPoint.size = 8;
+TouchPoint.size = 14;
 ```
 
-### Size
+#### Size
 Change the initial size of the TouchPoint. This value is `px`. 
 
-Default: '20'.
+Default: '20'
 ```html
 TouchPoint.size = 5;
 ```
 
-### zIndex
+#### zIndex
 Change the zIndex of the TouchPoint. By default it's set at the highest `z-index` depth possible, but you may find the need to change it based on your own prototype. 
 
-Default: '9999'.
+Default: '9999'
 ```html
 TouchPoint.z = 500;
 ```
