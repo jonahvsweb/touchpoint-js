@@ -2,7 +2,7 @@
   "name": "touchpoint",
   "description": "Visually show taps/cicks on HTML prototypes.",
   "main": "touchpoint.js",
-  "homepage": "http://jonahvsweb.com",
+  "homepage": "https://github.com/jonahvsweb/touchpoint-js",
   "license": "MIT",
   "authors": [
     "Jonah Bitautas <jonahvsweb@gmail.com>"
