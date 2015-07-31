@@ -17,6 +17,7 @@ var TouchPoint;
   TouchPoint = {
 
     el: 'div', 
+    dom: '', 
     styleEl: '',
     color: '#FFF', 
     opacity: 0.8, 
@@ -25,17 +26,22 @@ var TouchPoint;
     tp: '', 
     z: 9999,
 
-    init: function() {
+    init: function(el) {
+      TouchPoint.dom = el;
+
       TouchPoint
         .createCss('.tp-init', 
           'position: absolute; width: ' + TouchPoint.size + 'px; height: ' + TouchPoint.size + 'px; background-color: ' + TouchPoint.color + '; opacity: ' + TouchPoint.opacity + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ' + TouchPoint.z + ';')
         .createCss('.tp-anim', 
           '-ms-transform: scale(' + TouchPoint.scale + '); -webkit-transform: scale(' + TouchPoint.scale + '); -moz-transform: scale(' + TouchPoint.scale + '); -o-transform: scale(' + TouchPoint.scale + '); transform: scale(' + TouchPoint.scale + '); opacity: 0;'
         );
+      TouchPoint.dom.addEventListener("click", TouchPoint.create, false);
     },
 
     create: function(e) {
+      TouchPoint.dom.removeEventListener("click", TouchPoint.create, false);
       TouchPoint.tp = document.createElement(TouchPoint.el);
+      TouchPoint.tp.setAttribute('id', 'touchpoint');
       TouchPoint.tp.style.left = (e.clientX - (TouchPoint.size * 0.5)) + 'px';
       TouchPoint.tp.style.top = (e.clientY - (TouchPoint.size * 0.5)) + 'px';
       TouchPoint.tp.className = 'tp-init';
@@ -51,9 +57,17 @@ var TouchPoint;
     },
 
     gc: function(e) {
-      e.target.removeEventListener('transitionend', TouchPoint.gc);
-      document.body.removeChild(e.target);
-      TouchPoint.tp = '';
+      var currTP = document.body.querySelector('#touchpoint');
+
+      if(currTP) {
+        e.target.removeEventListener('transitionend', TouchPoint.gc, false);
+        document.body.removeChild(currTP);
+        TouchPoint.reInit();
+      }
+    },
+
+    reInit: function() {
+      TouchPoint.dom.addEventListener("click", TouchPoint.create, false);
     },
 
     createCss: function(name, rules) {
