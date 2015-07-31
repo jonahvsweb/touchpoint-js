@@ -17,7 +17,7 @@ var TouchPoint;
   TouchPoint = {
 
     el: 'div', 
-    dom: '', 
+    dom: window, 
     styleEl: '',
     color: '#FFF', 
     opacity: 0.8, 
