@@ -18,8 +18,7 @@ After you load the script you simply initialize TouchPoint and add an event list
 
 ```html
 <script>
-	TouchPoint.init();
-	window.addEventListener("click", TouchPoint.create, false);
+	TouchPoint.init(window);
 </script>
 ```
 
@@ -36,6 +35,14 @@ Change the default color of TouchPoint. Any valid CSS color can be used.
 Default value: `'#FFF'`
 ```html
 TouchPoint.color = 'red';
+```
+
+#### DOM
+Change the default color of TouchPoint. Any valid CSS color can be used. 
+
+Default value: `window`
+```html
+TouchPoint.dom = elementVarId;
 ```
 
 #### Element
