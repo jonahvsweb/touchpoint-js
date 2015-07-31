@@ -1,6 +1,6 @@
 {
   "name": "TouchPoint.js",
-  "version": "1.0.0 Beta",
+  "version": "1.0.0",
   "description": "A JavaScript library that visually shows taps/cicks on HTML prototypes",
   "devDependencies": {},
   "repository": {
