@@ -89,7 +89,7 @@ TouchPoint.z = 500;
 Performance should not be an issue because each individual TouchPoint element is dynamically created and then automatically removed from the DOM after being used.
 
 ## Release Notes
-**TouchPoint.js 1.0 Beta**   
+**TouchPoint.js 1.0**   
 – Initial Release       
 
 *This is in active development.*
