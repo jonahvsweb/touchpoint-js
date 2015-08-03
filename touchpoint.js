@@ -1,5 +1,5 @@
 /*!
- * TouchPoint.js 1.0.0 Beta
+ * TouchPoint.js 1.0.0
  * A JavaScript library that visually shows taps/cicks on HTML prototypes.
  * https://github.com/jonahvsweb/touchpoint-js
  *
@@ -16,6 +16,8 @@ var TouchPoint;
 
   TouchPoint = {
 
+    isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
+    clickTap: ('ontouchstart' in window ? 'touchstart' : 'click'),
     el: 'div', 
     dom: window, 
     styleEl: '',
@@ -31,19 +33,29 @@ var TouchPoint;
 
       TouchPoint
         .createCss('.tp-init', 
-          'position: absolute; width: ' + TouchPoint.size + 'px; height: ' + TouchPoint.size + 'px; background-color: ' + TouchPoint.color + '; opacity: ' + TouchPoint.opacity + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ' + TouchPoint.z + ';')
+          'position: relative; width: ' + TouchPoint.size + 'px; height: ' + TouchPoint.size + 'px; background-color: ' + TouchPoint.color + '; opacity: ' + TouchPoint.opacity + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ' + TouchPoint.z + ';')
         .createCss('.tp-anim', 
           '-ms-transform: scale(' + TouchPoint.scale + '); -webkit-transform: scale(' + TouchPoint.scale + '); -moz-transform: scale(' + TouchPoint.scale + '); -o-transform: scale(' + TouchPoint.scale + '); transform: scale(' + TouchPoint.scale + '); opacity: 0;'
         );
-      TouchPoint.dom.addEventListener("click", TouchPoint.create, false);
+      TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
     },
 
     create: function(e) {
-      TouchPoint.dom.removeEventListener("click", TouchPoint.create, false);
+      TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
+
       TouchPoint.tp = document.createElement(TouchPoint.el);
       TouchPoint.tp.setAttribute('id', 'touchpoint');
-      TouchPoint.tp.style.left = (e.clientX - (TouchPoint.size * 0.5)) + 'px';
-      TouchPoint.tp.style.top = (e.clientY - (TouchPoint.size * 0.5)) + 'px';
+
+      if(TouchPoint.getMobileOS() === 'iOS') {
+        TouchPoint.tp.style.left = (e.pageX - (TouchPoint.size * 0.5)) + 'px';
+        TouchPoint.tp.style.top = (e.pageY - (TouchPoint.size * 0.5)) + 'px';
+      } else if (TouchPoint.getMobileOS() === 'Android') {
+        TouchPoint.tp.style.left = (e.touches[0].pageX - (TouchPoint.size * 0.5)) + 'px';
+        TouchPoint.tp.style.top = (e.touches[0].pageY - (TouchPoint.size * 0.5)) + 'px';
+      } else { 
+        TouchPoint.tp.style.left = (e.clientX - (TouchPoint.size * 0.5)) + 'px';
+        TouchPoint.tp.style.top = (e.clientY - (TouchPoint.size * 0.5)) + 'px';
+      }
       TouchPoint.tp.className = 'tp-init';
 
       document.body.appendChild(TouchPoint.tp);
@@ -67,11 +79,11 @@ var TouchPoint;
     },
 
     reInit: function() {
-      TouchPoint.dom.addEventListener("click", TouchPoint.create, false);
+      TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
     },
 
     createCss: function(name, rules) {
-      var head = document.getElementsByTagName('head')[0];
+      var head = document.head || document.getElementsByTagName('head')[0];
 
       for(var i = 0; i < head.childNodes.length; i = i + 1) {
         if(head.getElementsByTagName('style')[i].tagName.toLowerCase() === 'style') {
@@ -87,6 +99,18 @@ var TouchPoint;
         }
       }
       return TouchPoint;
+    },
+
+    getMobileOS: function() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      if(userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i )) {
+        return 'iOS';
+      } else if(userAgent.match( /Android/i )) {
+        return 'Android';
+      } else {
+        return 'unknown';
+      }
     }
   };
   // requestNextAnimationFrame shim from: https://gist.github.com/getify/3004342
