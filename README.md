@@ -38,11 +38,17 @@ TouchPoint.color = 'red';
 ```
 
 #### DOM
-Change the default color of TouchPoint. Any valid CSS color can be used. 
+Change the default DOM element that TouchPoint will be active over. If you want TouchPoint to only show on a specific element, make sure that that element is set to `overflow: visible`, otherwise TouchPoint will get clipped.
 
 Default value: `window`
 ```html
 TouchPoint.dom = elementVarId;
+```
+
+or (recommended)
+
+```html
+TouchPoint.init(elementVarId);
 ```
 
 #### Element
