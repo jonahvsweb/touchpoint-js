@@ -2,7 +2,7 @@
 
 A tiny (3.6kb minified) vanilla JavaScript library made for in-browser HTML prototyping (as part of the UX process) that visually shows where the user clicks/taps on-screen using CSS3 transforms and transitions. TouchPoint is highly customizable, mobile ready and great for screencasting, screen recording, user testing and presentations.
 
-![TouchPoint.js in action](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/touchpoint-js.gif "TouchPoint.js in action")
+![TouchPoint.js in action](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/touchpoint-js-intro.gif "TouchPoint.js in action")
 
 **Live Demo: [View](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/demo.html)**
 
