@@ -4,7 +4,7 @@ A tiny (3.6kb minified) vanilla JavaScript library made for in-browser HTML prot
 
 ![TouchPoint.js in action](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/touchpoint-js.gif "TouchPoint.js in action")
 
-**Live demo: [codepen.io/jonahvsweb/full/bdQmpd/](http://codepen.io/jonahvsweb/full/bdQmpd/)**
+**Live Demo: [View Demo](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/demo.html)**
 
 ## Installation
 Download and include `touchpoint.js` or `touchpoint.min.js` in the `<head>` or at the end of the `<body>` (recommended) in your HTML document. There are no dependencies:
