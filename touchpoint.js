@@ -1,13 +1,3 @@
-/*!
- * TouchPoint.js 1.0.0
- * A JavaScript library that visually shows taps/cicks on HTML prototypes.
- * https://github.com/jonahvsweb/touchpoint-js
- *
- * Copyright (c) 2015 Jonah Bitautas <jonahvsweb@gmail.com>
- *
- * Released under the MIT license
- * LICENSE.txt
- */
 var TouchPoint;
 
 (function () {
