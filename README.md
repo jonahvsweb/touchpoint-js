@@ -38,7 +38,7 @@ TouchPoint.color = 'red';
 ```
 
 #### DOM
-Change the default DOM element that TouchPoint will be active over. If you want TouchPoint to only show on a specific element, make sure that that element is set to `overflow: visible`, otherwise TouchPoint will get clipped.
+Change the default DOM element that TouchPoint will be active over. Any valid selector can be used: element name, CSS class or ID. If you want TouchPoint to only show on a specific element, make sure that that element is set to `overflow: visible`, otherwise TouchPoint will get clipped.
 
 Default value: `window`
 ```html
@@ -92,7 +92,9 @@ TouchPoint.z = 500;
 ```
 
 ## Performance
-Performance should not be an issue because each individual TouchPoint element is dynamically created and then automatically removed from the DOM after being used.
+Performance should not be an issue because each individual TouchPoint element is dynamically created and then automatically removed from the DOM after being used. 
+
+The animation is handled via the `requestAnimationFrame` function that is available in all current browsers. This has better overall performance than using `setTimeout`, which doesn't redraw consistently. 
 
 ## Release Notes
 **TouchPoint.js 1.0**   
