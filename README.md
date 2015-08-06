@@ -24,7 +24,7 @@ After you load the script you simply initialize TouchPoint and add an event list
 
 **That's it!**
 
-[Start clicking away on the page to see it in action.](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/)
+[Start clicking away on the page to see it in action.](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/basic-demo.html)
 
 ## Options
 TouchPoint is customizable. There are a number of options that you have access to to customize the look for your needs. It's important that these options be defined before you initialize TouchPoint with `TouchPoint.init()`. Otherwise, your updates won't show.

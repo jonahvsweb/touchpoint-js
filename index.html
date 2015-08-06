@@ -1,23 +1,54 @@
 <html>
 	<head>
-		<title></title>
+		<title>TouchPoint.js - A Javascript library that shows taps/clicks for HTML prototypes on desktop and mobile</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="//jonahvsweb.com/in-the-lab/lib/devices.min.css">
 		<style>
 			body {
-				padding: 0; margin: 0 auto;
-				width: 100%; height: auto;
-				background-color: #000;
-				color: #FFF;
+			  width: 100%; height: auto;
+			  padding: 0;
+			  margin: 0 auto;
+			  background-color: #000;
+			  overflow: hidden;
+			}
+
+			.container {
+			  position: absolute;
+			  top: 50px;
+			  left: 30%;
 			}
 		</style>
 	</head>
 	<body>
-		
-		<script src="touchpoint.js"></script>
+		<div class="container">
+		  <div class="marvel-device iphone6 silver">
+		      <div class="top-bar"></div>
+		      <div class="sleep"></div>
+		      <div class="volume"></div>
+		      <div class="camera"></div>
+		      <div class="sensor"></div>
+		      <div class="speaker"></div>
+		      <div class="screen">
+		          <!-- Content goes here -->
+		      </div>
+		      <div class="home"></div>
+		      <div class="bottom-bar"></div>
+		  </div>
+		</div>
+		<script src="dist/touchpoint.min.js"></script>
 		<script>
 			(function () {
-				TouchPoint.color = 'red';
-				TouchPoint.init(window); 
+			  TouchPoint.color = 'red';
+			  TouchPoint.init(window); 
 			})();
+		</script>
+		<script>
+			(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+			function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+			e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+			e.src='//www.google-analytics.com/analytics.js';
+			r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+			ga('create','UA-XXXXX-X');ga('send','pageview');
 		</script>
 	</body>
 </html>
