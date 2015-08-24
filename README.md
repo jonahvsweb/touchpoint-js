@@ -102,5 +102,11 @@ The animation is handled via the `requestAnimationFrame` function that is availa
 
 *This is in active development.*
 
+## Roadmap
+- Reintroduce quick clicking.
+- Add keyboard shortcut to enable/disable script.
+
 ## Feedback
-If you discover any issues or have questions regarding usage, please send a message me here on GitHub, [@jonahvsweb](https://twitter.com/jonahvsweb) on Twitter or from my website, [jonahvsweb.com](http://jonahvsweb.com).
+If you discover any issues please check [open/past issues](https://github.com/jonahvsweb/touchpoint-js/issues) and [open a new issue](https://github.com/jonahvsweb/touchpoint-js/issues/new) if one does not already exist.
+
+If you have any questions regarding usage, please send a message me here on GitHub, [@jonahvsweb](https://twitter.com/jonahvsweb) on Twitter or from my website, [jonahvsweb.com](http://jonahvsweb.com).
