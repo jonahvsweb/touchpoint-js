@@ -3,6 +3,7 @@
 node_modules
 build
 *.node
+gh-pages
 components
 coverage
 *.orig
