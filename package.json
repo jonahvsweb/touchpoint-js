@@ -4,6 +4,7 @@
   "description": "A JavaScript library that visually shows taps/cicks on HTML prototypes",
   "devDependencies": {
     "babel-core": "6.26.0",
+    "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.6.0",
     "babel-preset-es2015": "6.24.1",
     "grunt": "0.4.5",
