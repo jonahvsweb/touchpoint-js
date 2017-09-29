@@ -4,7 +4,7 @@ module.exports = function(grunt) {
                     ' * <%= pkg.description %> \n' +
                     ' * <%= pkg.repository.url %> \n' +
                     ' * \n' + 
-                    ' * Copyright (c) 2015 <%= pkg.author %> <jonahvsweb@gmail.com> \n' +
+                    ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %> <jonahvsweb@gmail.com> \n' +
                     ' * \n' + 
                     ' * Released under the <%= pkg.license %> license \n' + 
                     '*/ \n',
@@ -12,25 +12,15 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    babel: {
-      options: {
-        sourceMap: true
-      }, 
-      dist: {
-        files: {
-          'dist/touchpoint-es5.js': 'dist/touchpoint-es6.js'
-        }
-      }
-    }, 
-    // Clean
-    clean: {
-	  build: {
-	    src: [ 'dist' ]
-	  },
-	  scripts: {
-	    src: [ 'dist/*.js', '!dist/<%= pkg.name %>.js' ]
-	  }
-	},
+    
+    // Copy 
+    copy: {
+      main: {
+        nonull: true,
+        src: 'touchpoint.js',
+        dest: 'dist/touchpoint.js',
+      },
+    },
     // Concat
     concat: {
       options: {
@@ -38,10 +28,26 @@ module.exports = function(grunt) {
         banner: bannerContent
       },
       dist: {
+        src: ['touchpoint-es5.js'],
+        dest: 'dist/touchpoint-es5.js'
+      },
+      dist: {
         src: ['touchpoint.js'],
         dest: 'dist/touchpoint.js'
       }
     },
+    // Babel
+    babel: {
+      options: {
+        sourceMap: true, 
+        presets: ['env']
+      }, 
+      dist: {
+        files: {
+          'dist/touchpoint-es5.js': 'dist/touchpoint.js'
+        }
+      }
+    }, 
     // Uglify
     uglify: {
       options: {
@@ -49,7 +55,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/touchpoint.min.js': ['<%= concat.dist.dest %>']
+          'dist/touchpoint-es5.min.js': ['dist/touchpoint-es5.js']
         }
       }
     },
@@ -67,17 +73,17 @@ module.exports = function(grunt) {
     }
   });
   // Load Tasks
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-babel');
   // Register Tasks
   grunt.registerTask('es6', ['babel']);
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('jsErrors', ['jshint']);
   grunt.registerTask(
 	  'build', 
 	  'Compiles all of the assets and copies the files to the build directory.', 
-	  ['clean:build', 'concat', 'uglify']
+	  ['copy', 'concat', 'babel', 'uglify']
 	);
 };
