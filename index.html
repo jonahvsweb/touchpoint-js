@@ -2,7 +2,7 @@
 	<head>
 		<title>TouchPoint.js - A Javascript library that shows taps/clicks for HTML prototypes on desktop and mobile</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="//jonahvsweb.com/in-the-lab/lib/devices.min.css">
+		<link rel="stylesheet" href="//lighthouseux.com/in-the-lab/lib/devices.min.css">
 		<style>
 			body {
 			  width: 100%; height: auto;
@@ -21,21 +21,32 @@
 	</head>
 	<body>
 		<div class="container">
-		  <div class="marvel-device iphone6 silver">
-		      <div class="top-bar"></div>
-		      <div class="sleep"></div>
-		      <div class="volume"></div>
-		      <div class="camera"></div>
-		      <div class="sensor"></div>
-		      <div class="speaker"></div>
-		      <div class="screen">
-		          <!-- Content goes here -->
+		  <section id="iphone-x" class="silver">
+		    <div class="wrap">
+		      <h1 class="new">iPhone X</h1>
+		      <div class="marvel-device iphone-x">
+		        <div class="notch">
+		          <div class="camera"></div>
+		          <div class="speaker"></div>
+		        </div>
+		        <div class="top-bar"></div>
+		        <div class="sleep"></div>
+		        <div class="bottom-bar"></div>
+		        <div class="volume"></div>
+		        <div class="overflow">
+		          <div class="shadow shadow--tr"></div>
+		          <div class="shadow shadow--tl"></div>
+		          <div class="shadow shadow--br"></div>
+		          <div class="shadow shadow--bl"></div>
+		        </div>
+		        <div class="inner-shadow"></div>
+		        <div class="screen"></div>
 		      </div>
-		      <div class="home"></div>
-		      <div class="bottom-bar"></div>
-		  </div>
+		    </div>
+		  </section>
 		</div>
-		<script src="dist/touchpoint.min.js"></script>
+		<script src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+		<script src="dist/touchpoint.js"></script>
 		<script>
 			(function () {
 			  TouchPoint.color = 'red';

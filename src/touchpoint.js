@@ -1,10 +1,8 @@
-var TouchPoint;
+'use strict';
 
 (function () {
 
-  'use strict';
-
-  TouchPoint = {
+  var TouchPoint = {
 
     isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
     clickTap: ('ontouchstart' in window ? 'touchstart' : 'click'),

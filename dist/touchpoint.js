@@ -1,19 +1,17 @@
 /* 
- * TouchPoint.js v1.0.0 - 2015-08-03 
+ * TouchPoint.js v1.0.1 - 2017-09-29 
  * A JavaScript library that visually shows taps/cicks on HTML prototypes 
  * https://github.com/jonahvsweb/touchpoint-js 
  * 
- * Copyright (c) 2015 Jonah Bitautas <jonahvsweb@gmail.com> 
+ * Copyright (c) 2017 Jonah Bitautas <jonahvsweb@gmail.com> 
  * 
  * Released under the MIT license 
 */ 
-var TouchPoint;
+'use strict';
 
 (function () {
 
-  'use strict';
-
-  TouchPoint = {
+  var TouchPoint = {
 
     isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
     clickTap: ('ontouchstart' in window ? 'touchstart' : 'click'),
@@ -49,6 +47,9 @@ var TouchPoint;
         TouchPoint.tp.style.left = (e.pageX - (TouchPoint.size * 0.5)) + 'px';
         TouchPoint.tp.style.top = (e.pageY - (TouchPoint.size * 0.5)) + 'px';
       } else if (TouchPoint.getMobileOS() === 'Android') {
+        TouchPoint.tp.style.left = (e.touches[0].pageX - (TouchPoint.size * 0.5)) + 'px';
+        TouchPoint.tp.style.top = (e.touches[0].pageY - (TouchPoint.size * 0.5)) + 'px';
+      } else if (e.touches && e.touches.length > 0) { 
         TouchPoint.tp.style.left = (e.touches[0].pageX - (TouchPoint.size * 0.5)) + 'px';
         TouchPoint.tp.style.top = (e.touches[0].pageY - (TouchPoint.size * 0.5)) + 'px';
       } else { 

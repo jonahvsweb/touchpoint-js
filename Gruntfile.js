@@ -4,7 +4,7 @@ module.exports = function(grunt) {
                     ' * <%= pkg.description %> \n' +
                     ' * <%= pkg.repository.url %> \n' +
                     ' * \n' + 
-                    ' * Copyright (c) 2015 <%= pkg.author %> <jonahvsweb@gmail.com> \n' +
+                    ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %> <jonahvsweb@gmail.com> \n' +
                     ' * \n' + 
                     ' * Released under the <%= pkg.license %> license \n' + 
                     '*/ \n',
@@ -12,34 +12,50 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    // Clean
-    clean: {
-	  build: {
-	    src: [ 'dist' ]
-	  },
-	  scripts: {
-	    src: [ 'dist/*.js', '!dist/<%= pkg.name %>.js' ]
-	  }
-	},
+    
+    // Copy 
+    copy: {
+      src: {
+        nonull: true,
+        src: 'src/touchpoint.js',
+        dest: 'dist/touchpoint.js',
+      },
+    },
     // Concat
     concat: {
       options: {
         separator: ';',
         banner: bannerContent
       },
-      dist: {
-        src: ['touchpoint.js'],
+      es5: {
+        src: ['dist/touchpoint.js'],
+        dest: 'dist/touchpoint-es5.js'
+      },
+      es6: {
+        src: ['src/touchpoint.js'],
         dest: 'dist/touchpoint.js'
       }
     },
+    // Babel
+    babel: {
+      options: {
+        sourceMap: true, 
+        presets: ['env']
+      }, 
+      convert: {
+        files: {
+          'dist/touchpoint-es5.js': 'dist/touchpoint.js'
+        }
+      }
+    }, 
     // Uglify
     uglify: {
       options: {
         banner: bannerContent
       },
-      dist: {
+      es5: {
         files: {
-          'dist/touchpoint.min.js': ['<%= concat.dist.dest %>']
+          'dist/touchpoint-es5.min.js': ['dist/touchpoint-es5.js']
         }
       }
     },
@@ -57,15 +73,17 @@ module.exports = function(grunt) {
     }
   });
   // Load Tasks
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-babel');
   // Register Tasks
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('es6', ['babel']);
+  grunt.registerTask('jsErrors', ['jshint']);
   grunt.registerTask(
 	  'build', 
 	  'Compiles all of the assets and copies the files to the build directory.', 
-	  ['clean:build', 'concat', 'uglify']
+	  ['copy', 'concat', 'babel', 'uglify']
 	);
 };
