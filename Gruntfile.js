@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     copy: {
       src: {
         nonull: true,
-        src: 'touchpoint.js',
+        src: 'src/touchpoint.js',
         dest: 'dist/touchpoint.js',
       },
     },
@@ -28,11 +28,11 @@ module.exports = function(grunt) {
         banner: bannerContent
       },
       es5: {
-        src: ['touchpoint-es5.js'],
+        src: ['dist/touchpoint.js'],
         dest: 'dist/touchpoint-es5.js'
       },
       es6: {
-        src: ['touchpoint.js'],
+        src: ['src/touchpoint.js'],
         dest: 'dist/touchpoint.js'
       }
     },
