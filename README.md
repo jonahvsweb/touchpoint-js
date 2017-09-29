@@ -2,9 +2,9 @@
 
 A tiny (3.6kb minified) vanilla JavaScript library made for in-browser HTML prototyping (as part of the UX process) that visually shows where the user clicks/taps on-screen using CSS3 transforms and transitions. TouchPoint is highly customizable, mobile ready and great for screencasting, screen recording, user testing and presentations.
 
-![TouchPoint.js in action](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/touchpoint-js-intro.gif "TouchPoint.js in action")
+![TouchPoint.js in action](http://lighthouseux.com/in-the-lab/lib/touchpoint-js/touchpoint-js-intro.gif "TouchPoint.js in action")
 
-**Live Demo: [View](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/demo.html)**
+**Live Demo: [View](http://lighthouseux.com/in-the-lab/lib/touchpoint-js/demo.html)**
 
 ## Installation
 Download and include `touchpoint.js` or `touchpoint.min.js` in the `<head>` or at the end of the `<body>` (recommended) in your HTML document. There are no dependencies:
@@ -24,7 +24,7 @@ After you load the script you simply initialize TouchPoint and add an event list
 
 **That's it!**
 
-[Start clicking away on the page to see it in action.](http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/basic-demo.html)
+[Start clicking away on the page to see it in action.](http://lighthouseux.com/in-the-lab/lib/touchpoint-js/basic-demo.html)
 
 ## Options
 TouchPoint is customizable. There are a number of options that you have access to to customize the look for your needs. It's important that these options be defined before you initialize TouchPoint with `TouchPoint.init()`. Otherwise, your updates won't show.
