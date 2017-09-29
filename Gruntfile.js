@@ -12,6 +12,16 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    babel: {
+      options: {
+        sourceMap: true
+      }, 
+      dist: {
+        files: {
+          'dist/touchpoint-es5.js': 'dist/touchpoint-es6.js'
+        }
+      }
+    }, 
     // Clean
     clean: {
 	  build: {
@@ -61,7 +71,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-babel');
   // Register Tasks
+  grunt.registerTask('es6', ['babel']);
   grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
   grunt.registerTask(
 	  'build', 
