@@ -23,9 +23,11 @@ var TouchPoint;
     size: 20, 
     scale: 8,
     tp: '', 
+    animIds: {}, 
 
     init(dom = 'body') {
 
+      window.addEventListener('load', this.setupAnimation, false);
       this.dom = document.querySelector(dom);
       
       this
@@ -59,7 +61,7 @@ var TouchPoint;
 
       document.body.appendChild(TouchPoint.tp);
 
-      requestNextAnimationFrame(() => {
+      window.requestNextAnimationFrame(() => {
         TouchPoint.tp.className += ' tp-anim';
       });
       TouchPoint.tp.addEventListener('transitionend', TouchPoint.gc, false);
@@ -100,6 +102,7 @@ var TouchPoint;
     },
 
     getMobileOS() {
+      
       let userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
       if(userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i )) {
@@ -109,44 +112,53 @@ var TouchPoint;
       } else {
         return 'unknown';
       }
-    }
-  };
+    }, 
 
-  // requestNextAnimationFrame shim from: https://gist.github.com/getify/3004342
-  let ids = {};
+    requestId() {
 
-  let requestId = () => {
-      
       let id;
       
       do {
           id = Math.floor(Math.random() * 1E9);
-      } while (id in ids);
+        } while (id in TouchPoint.animIds);
 
       return id;
-  }
+    }, 
 
-  if (!window.requestNextAnimationFrame) {
-      window.requestNextAnimationFrame = (callback, element) => {
-          let id = requestId();
+    setupAnimation(e) {
 
-          ids[id] = requestAnimationFrame(() => {
-              ids[id] = requestAnimationFrame((ts) => {
-                  delete ids[id];
-                  callback(ts);
-              }, element);
+      if (!window.requestNextAnimationFrame) {
+        
+        window.requestNextAnimationFrame = (callback, element) => {
+          
+          let id = TouchPoint.requestId();
+
+          TouchPoint.animIds[id] = requestAnimationFrame(() => {
+            
+            TouchPoint.animIds[id] = requestAnimationFrame((ts) => {
+              
+              delete TouchPoint.animIds[id];
+              callback(ts);
+            
+            }, element);
+          
           }, element);
 
           return id;
-      };
-  }
+        };
+      }
 
-  if (!window.cancelNextAnimationFrame) {
-      window.cancelNextAnimationFrame = (id) => {
-          if (ids[id]) {
-              cancelAnimationFrame(ids[id]);
-              delete ids[id];
+      if (!window.cancelNextAnimationFrame) {
+      
+        window.cancelNextAnimationFrame = (id) => {
+          
+          if (TouchPoint.animIds[id]) {
+            
+            cancelAnimationFrame(TouchPoint.animIds[id]);
+            delete TouchPoint.animIds[id];
           }
-      };
+        }
+      }
+    }
   }
 })();

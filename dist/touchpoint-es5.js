@@ -23,11 +23,13 @@ var TouchPoint;
     size: 20,
     scale: 8,
     tp: '',
+    animIds: {},
 
     init: function init() {
       var dom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'body';
 
 
+      window.addEventListener('load', this.setupAnimation, false);
       this.dom = document.querySelector(dom);
 
       this.createCss('.tp-init', 'position: absolute; width: ' + this.size + 'px; height: ' + this.size + 'px; background-color: ' + this.color + '; opacity:  ' + this.opacity + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: 9999;').createCss('.tp-anim', '-ms-transform: scale(' + this.scale + '); -webkit-transform: scale(' + this.scale + '); -moz-transform: scale(' + this.scale + '); -o-transform: scale(' + this.scale + '); transform: scale(' + this.scale + '); opacity: 0;');
@@ -55,7 +57,7 @@ var TouchPoint;
 
       document.body.appendChild(TouchPoint.tp);
 
-      requestNextAnimationFrame(function () {
+      window.requestNextAnimationFrame(function () {
         TouchPoint.tp.className += ' tp-anim';
       });
       TouchPoint.tp.addEventListener('transitionend', TouchPoint.gc, false);
@@ -93,6 +95,7 @@ var TouchPoint;
       return TouchPoint;
     },
     getMobileOS: function getMobileOS() {
+
       var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
       if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
@@ -102,45 +105,50 @@ var TouchPoint;
       } else {
         return 'unknown';
       }
-    }
-  };
+    },
+    requestId: function requestId() {
 
-  // requestNextAnimationFrame shim from: https://gist.github.com/getify/3004342
-  var ids = {};
+      var id = void 0;
 
-  var requestId = function requestId() {
-
-    var id = void 0;
-
-    do {
-      id = Math.floor(Math.random() * 1E9);
-    } while (id in ids);
-
-    return id;
-  };
-
-  if (!window.requestNextAnimationFrame) {
-    window.requestNextAnimationFrame = function (callback, element) {
-      var id = requestId();
-
-      ids[id] = requestAnimationFrame(function () {
-        ids[id] = requestAnimationFrame(function (ts) {
-          delete ids[id];
-          callback(ts);
-        }, element);
-      }, element);
+      do {
+        id = Math.floor(Math.random() * 1E9);
+      } while (id in TouchPoint.animIds);
 
       return id;
-    };
-  }
+    },
+    setupAnimation: function setupAnimation(e) {
 
-  if (!window.cancelNextAnimationFrame) {
-    window.cancelNextAnimationFrame = function (id) {
-      if (ids[id]) {
-        cancelAnimationFrame(ids[id]);
-        delete ids[id];
+      if (!window.requestNextAnimationFrame) {
+
+        window.requestNextAnimationFrame = function (callback, element) {
+
+          var id = TouchPoint.requestId();
+
+          TouchPoint.animIds[id] = requestAnimationFrame(function () {
+
+            TouchPoint.animIds[id] = requestAnimationFrame(function (ts) {
+
+              delete TouchPoint.animIds[id];
+              callback(ts);
+            }, element);
+          }, element);
+
+          return id;
+        };
       }
-    };
-  }
+
+      if (!window.cancelNextAnimationFrame) {
+
+        window.cancelNextAnimationFrame = function (id) {
+
+          if (TouchPoint.animIds[id]) {
+
+            cancelAnimationFrame(TouchPoint.animIds[id]);
+            delete TouchPoint.animIds[id];
+          }
+        };
+      }
+    }
+  };
 })();
 //# sourceMappingURL=touchpoint-es5.js.map
