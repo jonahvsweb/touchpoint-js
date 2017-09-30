@@ -111,16 +111,20 @@ var TouchPoint;
       }
     }
   };
+
   // requestNextAnimationFrame shim from: https://gist.github.com/getify/3004342
   var ids = {};
 
-  function requestId() {
-    var id;
+  var requestId = function requestId() {
+
+    var id = void 0;
+
     do {
       id = Math.floor(Math.random() * 1E9);
     } while (id in ids);
+
     return id;
-  }
+  };
 
   if (!window.requestNextAnimationFrame) {
     window.requestNextAnimationFrame = function (callback, element) {

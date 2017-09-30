@@ -2,7 +2,7 @@
 
 var TouchPoint;
 
-(function () {
+(() => {
 
   TouchPoint = {
 
@@ -53,7 +53,7 @@ var TouchPoint;
 
       document.body.appendChild(TouchPoint.tp);
 
-      requestNextAnimationFrame(function () {
+      requestNextAnimationFrame(() => {
         TouchPoint.tp.className += ' tp-anim';
       });
       TouchPoint.tp.addEventListener('transitionend', TouchPoint.gc, false);
@@ -99,7 +99,7 @@ var TouchPoint;
     },
 
     getMobileOS() {
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      let userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
       if(userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i )) {
         return 'iOS';
@@ -110,23 +110,27 @@ var TouchPoint;
       }
     }
   };
-  // requestNextAnimationFrame shim from: https://gist.github.com/getify/3004342
-  var ids = {};
 
-  function requestId() {
-      var id;
+  // requestNextAnimationFrame shim from: https://gist.github.com/getify/3004342
+  let ids = {};
+
+  let requestId = () => {
+      
+      let id;
+      
       do {
           id = Math.floor(Math.random() * 1E9);
       } while (id in ids);
+
       return id;
   }
 
   if (!window.requestNextAnimationFrame) {
-      window.requestNextAnimationFrame = function (callback, element) {
-          var id = requestId();
+      window.requestNextAnimationFrame = (callback, element) => {
+          let id = requestId();
 
-          ids[id] = requestAnimationFrame(function () {
-              ids[id] = requestAnimationFrame(function (ts) {
+          ids[id] = requestAnimationFrame(() => {
+              ids[id] = requestAnimationFrame((ts) => {
                   delete ids[id];
                   callback(ts);
               }, element);
@@ -137,7 +141,7 @@ var TouchPoint;
   }
 
   if (!window.cancelNextAnimationFrame) {
-      window.cancelNextAnimationFrame = function (id) {
+      window.cancelNextAnimationFrame = (id) => {
           if (ids[id]) {
               cancelAnimationFrame(ids[id]);
               delete ids[id];
