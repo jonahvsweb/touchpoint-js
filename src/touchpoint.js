@@ -24,31 +24,30 @@ var TouchPoint;
       
       this
         .createCss('.tp-init', 
-          `position: relative; width: ${ this.size }px; height: ${ this.size }px; background-color: ${ this.color }; opacity:  ${ this.color }; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ${ this.z };`)
+          `position: absolute; width: ${ this.size }px; height: ${ this.size }px; background-color: ${ this.color }; opacity:  ${ this.opacity }; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ${ this.z };`)
         .createCss('.tp-anim', 
           `-ms-transform: scale(${ this.scale }); -webkit-transform: scale(${ this.scale }); -moz-transform: scale(${ this.scale }); -o-transform: scale(${ this.scale }); transform: scale(${ this.scale }); opacity: 0;`
         );
       this.dom.addEventListener(this.clickTap, this.create, false);
     },
 
-    create: function(e) {
-      TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
-
+    create(e) {
+      
       TouchPoint.tp = document.createElement(TouchPoint.el);
       TouchPoint.tp.setAttribute('id', 'touchpoint');
 
       if(TouchPoint.getMobileOS() === 'iOS') {
-        TouchPoint.tp.style.left = (e.pageX - (TouchPoint.size * 0.5)) + 'px';
-        TouchPoint.tp.style.top = (e.pageY - (TouchPoint.size * 0.5)) + 'px';
+        TouchPoint.tp.style.left = `${ e.pageX - (TouchPoint.size * 0.5) }px`;
+        TouchPoint.tp.style.top = `${ e.pageY - (TouchPoint.size * 0.5) }px`;
       } else if (TouchPoint.getMobileOS() === 'Android') {
-        TouchPoint.tp.style.left = (e.touches[0].pageX - (TouchPoint.size * 0.5)) + 'px';
-        TouchPoint.tp.style.top = (e.touches[0].pageY - (TouchPoint.size * 0.5)) + 'px';
+        TouchPoint.tp.style.left = `${ e.touches[0].pageX - (TouchPoint.size * 0.5) }px`;
+        TouchPoint.tp.style.top = `${ e.touches[0].pageY - (TouchPoint.size * 0.5) }px`;
       } else if (e.touches && e.touches.length > 0) { 
-        TouchPoint.tp.style.left = (e.touches[0].pageX - (TouchPoint.size * 0.5)) + 'px';
-        TouchPoint.tp.style.top = (e.touches[0].pageY - (TouchPoint.size * 0.5)) + 'px';
+        TouchPoint.tp.style.left = `${ e.touches[0].pageX - (TouchPoint.size * 0.5) }px`;
+        TouchPoint.tp.style.top = `${ e.touches[0].pageY - (TouchPoint.size * 0.5) }px`;
       } else { 
-        TouchPoint.tp.style.left = (e.clientX - (TouchPoint.size * 0.5)) + 'px';
-        TouchPoint.tp.style.top = (e.clientY - (TouchPoint.size * 0.5)) + 'px';
+        TouchPoint.tp.style.left = `${ e.clientX - (TouchPoint.size * 0.5) }px`;
+        TouchPoint.tp.style.top = `${ e.clientY - (TouchPoint.size * 0.5) }px`;
       }
       TouchPoint.tp.className = 'tp-init';
 
@@ -62,24 +61,28 @@ var TouchPoint;
       return TouchPoint;
     },
 
-    gc: function(e) {
-      var currTP = document.body.querySelector('#touchpoint');
+    gc(e) {
+      let currTP = document.querySelector('#touchpoint');
+
+      TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
 
       if(currTP) {
+
         e.target.removeEventListener('transitionend', TouchPoint.gc, false);
         document.body.removeChild(currTP);
         TouchPoint.reInit();
       }
     },
 
-    reInit: function() {
+    reInit() {
+
       TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
     },
 
-    createCss: function(name, rules) {
-      var head = document.head || document.getElementsByTagName('head')[0];
+    createCss(name, rules) {
+      let head = document.head || document.getElementsByTagName('head')[0];
 
-      for(var i = 0; i < head.childNodes.length; i = i + 1) {
+      for(let i = 0; i < head.childNodes.length; i = i + 1) {
         if(head.getElementsByTagName('style')[i].tagName.toLowerCase() === 'style') {
           head.getElementsByTagName('style')[i].innerHTML += name + ' { ' + rules + ' }';
           TouchPoint.styleEl = head.getElementsByTagName('style')[i];
@@ -95,7 +98,7 @@ var TouchPoint;
       return TouchPoint;
     },
 
-    getMobileOS: function() {
+    getMobileOS() {
       var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
       if(userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i )) {
