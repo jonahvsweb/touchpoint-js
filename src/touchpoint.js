@@ -28,12 +28,11 @@ var TouchPoint;
         .createCss('.tp-anim', 
           `-ms-transform: scale(${ this.scale }); -webkit-transform: scale(${ this.scale }); -moz-transform: scale(${ this.scale }); -o-transform: scale(${ this.scale }); transform: scale(${ this.scale }); opacity: 0;`
         );
-      this.dom.addEventListener(this.clickTap, this.create, false);
+      TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
     },
 
-    create: function(e) {
-      TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
-
+    create(e) {
+      
       TouchPoint.tp = document.createElement(TouchPoint.el);
       TouchPoint.tp.setAttribute('id', 'touchpoint');
 
@@ -62,24 +61,26 @@ var TouchPoint;
       return TouchPoint;
     },
 
-    gc: function(e) {
-      var currTP = document.body.querySelector('#touchpoint');
+    gc(e) {
+      let currTP = document.querySelector('#touchpoint');
 
       if(currTP) {
+        TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
         e.target.removeEventListener('transitionend', TouchPoint.gc, false);
         document.body.removeChild(currTP);
         TouchPoint.reInit();
       }
     },
 
-    reInit: function() {
+    reInit() {
+
       TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
     },
 
-    createCss: function(name, rules) {
-      var head = document.head || document.getElementsByTagName('head')[0];
+    createCss(name, rules) {
+      let head = document.head || document.getElementsByTagName('head')[0];
 
-      for(var i = 0; i < head.childNodes.length; i = i + 1) {
+      for(let i = 0; i < head.childNodes.length; i = i + 1) {
         if(head.getElementsByTagName('style')[i].tagName.toLowerCase() === 'style') {
           head.getElementsByTagName('style')[i].innerHTML += name + ' { ' + rules + ' }';
           TouchPoint.styleEl = head.getElementsByTagName('style')[i];
@@ -95,7 +96,7 @@ var TouchPoint;
       return TouchPoint;
     },
 
-    getMobileOS: function() {
+    getMobileOS() {
       var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
       if(userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i )) {

@@ -34,12 +34,9 @@ var TouchPoint;
       this.dom = document.querySelector(dom);
 
       this.createCss('.tp-init', 'position: relative; width: ' + this.size + 'px; height: ' + this.size + 'px; background-color: ' + this.color + '; opacity:  ' + this.color + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ' + this.z + ';').createCss('.tp-anim', '-ms-transform: scale(' + this.scale + '); -webkit-transform: scale(' + this.scale + '); -moz-transform: scale(' + this.scale + '); -o-transform: scale(' + this.scale + '); transform: scale(' + this.scale + '); opacity: 0;');
-      this.dom.addEventListener(this.clickTap, this.create, false);
+      TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
     },
-
-
     create: function create(e) {
-      TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
 
       TouchPoint.tp = document.createElement(TouchPoint.el);
       TouchPoint.tp.setAttribute('id', 'touchpoint');
@@ -68,21 +65,20 @@ var TouchPoint;
 
       return TouchPoint;
     },
-
     gc: function gc(e) {
-      var currTP = document.body.querySelector('#touchpoint');
+      var currTP = document.querySelector('#touchpoint');
 
       if (currTP) {
+        TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
         e.target.removeEventListener('transitionend', TouchPoint.gc, false);
         document.body.removeChild(currTP);
         TouchPoint.reInit();
       }
     },
-
     reInit: function reInit() {
+
       TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
     },
-
     createCss: function createCss(name, rules) {
       var head = document.head || document.getElementsByTagName('head')[0];
 
@@ -101,7 +97,6 @@ var TouchPoint;
       }
       return TouchPoint;
     },
-
     getMobileOS: function getMobileOS() {
       var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
