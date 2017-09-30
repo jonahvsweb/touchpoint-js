@@ -15,9 +15,7 @@ var TouchPoint;
 
   TouchPoint = {
 
-    isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
     clickTap: 'ontouchstart' in window ? 'touchstart' : 'click',
-    el: 'div',
     dom: '',
     styleEl: '',
     color: '#FFF',
@@ -25,7 +23,6 @@ var TouchPoint;
     size: 20,
     scale: 8,
     tp: '',
-    z: 9999,
 
     init: function init() {
       var dom = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'body';
@@ -33,12 +30,12 @@ var TouchPoint;
 
       this.dom = document.querySelector(dom);
 
-      this.createCss('.tp-init', 'position: absolute; width: ' + this.size + 'px; height: ' + this.size + 'px; background-color: ' + this.color + '; opacity:  ' + this.opacity + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ' + this.z + ';').createCss('.tp-anim', '-ms-transform: scale(' + this.scale + '); -webkit-transform: scale(' + this.scale + '); -moz-transform: scale(' + this.scale + '); -o-transform: scale(' + this.scale + '); transform: scale(' + this.scale + '); opacity: 0;');
+      this.createCss('.tp-init', 'position: absolute; width: ' + this.size + 'px; height: ' + this.size + 'px; background-color: ' + this.color + '; opacity:  ' + this.opacity + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: 9999;').createCss('.tp-anim', '-ms-transform: scale(' + this.scale + '); -webkit-transform: scale(' + this.scale + '); -moz-transform: scale(' + this.scale + '); -o-transform: scale(' + this.scale + '); transform: scale(' + this.scale + '); opacity: 0;');
       this.dom.addEventListener(this.clickTap, this.create, false);
     },
     create: function create(e) {
 
-      TouchPoint.tp = document.createElement(TouchPoint.el);
+      TouchPoint.tp = document.createElement('div');
       TouchPoint.tp.setAttribute('id', 'touchpoint');
 
       if (TouchPoint.getMobileOS() === 'iOS') {
@@ -62,10 +59,9 @@ var TouchPoint;
         TouchPoint.tp.className += ' tp-anim';
       });
       TouchPoint.tp.addEventListener('transitionend', TouchPoint.gc, false);
-
-      return TouchPoint;
     },
     gc: function gc(e) {
+
       var currTP = document.querySelector('#touchpoint');
 
       TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
@@ -74,14 +70,11 @@ var TouchPoint;
 
         e.target.removeEventListener('transitionend', TouchPoint.gc, false);
         document.body.removeChild(currTP);
-        TouchPoint.reInit();
+        TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
       }
     },
-    reInit: function reInit() {
-
-      TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
-    },
     createCss: function createCss(name, rules) {
+
       var head = document.head || document.getElementsByTagName('head')[0];
 
       for (var i = 0; i < head.childNodes.length; i = i + 1) {
