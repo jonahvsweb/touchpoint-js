@@ -1,5 +1,5 @@
 /* 
- * TouchPoint.js v1.0.1 - 2017-09-29 
+ * TouchPoint.js v1.0.1 - 2017-09-30 
  * A JavaScript library that visually shows taps/cicks on HTML prototypes 
  * https://github.com/jonahvsweb/touchpoint-js 
  * 
@@ -33,8 +33,8 @@ var TouchPoint;
 
       this.dom = document.querySelector(dom);
 
-      this.createCss('.tp-init', 'position: relative; width: ' + this.size + 'px; height: ' + this.size + 'px; background-color: ' + this.color + '; opacity:  ' + this.color + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ' + this.z + ';').createCss('.tp-anim', '-ms-transform: scale(' + this.scale + '); -webkit-transform: scale(' + this.scale + '); -moz-transform: scale(' + this.scale + '); -o-transform: scale(' + this.scale + '); transform: scale(' + this.scale + '); opacity: 0;');
-      TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
+      this.createCss('.tp-init', 'position: absolute; width: ' + this.size + 'px; height: ' + this.size + 'px; background-color: ' + this.color + '; opacity:  ' + this.opacity + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ' + this.z + ';').createCss('.tp-anim', '-ms-transform: scale(' + this.scale + '); -webkit-transform: scale(' + this.scale + '); -moz-transform: scale(' + this.scale + '); -o-transform: scale(' + this.scale + '); transform: scale(' + this.scale + '); opacity: 0;');
+      this.dom.addEventListener(this.clickTap, this.create, false);
     },
     create: function create(e) {
 
@@ -68,8 +68,10 @@ var TouchPoint;
     gc: function gc(e) {
       var currTP = document.querySelector('#touchpoint');
 
+      TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
+
       if (currTP) {
-        TouchPoint.dom.removeEventListener(TouchPoint.clickTap, TouchPoint.create, false);
+
         e.target.removeEventListener('transitionend', TouchPoint.gc, false);
         document.body.removeChild(currTP);
         TouchPoint.reInit();
