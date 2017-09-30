@@ -71,10 +71,29 @@ module.exports = function(grunt) {
         }
       }
     },
-    // Server
-    serve: {
+    // Watch 
+    watch: {
       options: {
-        port: 9000
+        livereload: true
+      }, 
+      js: {
+        files: [
+          'dist/*.js', 
+          '*.html'
+        ]
+      }
+    }, 
+    // Connect
+    connect: {
+      server: {
+        options: {
+          port: 9000,
+          base: '.',
+          hostname: '0.0.0.0',
+          protocol: 'http',
+          livereload: true,
+          open: true 
+        }
       }
     }
   });
@@ -84,11 +103,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-babel');
-  grunt.loadNpmTasks('grunt-serve');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   // Register Tasks
   grunt.registerTask('es6', ['babel']);
   grunt.registerTask('jsErrors', ['jshint']);
-  grunt.registerTask('server', ['serve']);
+  grunt.registerTask('server', ['connect', 'watch']);
   grunt.registerTask(
 	  'build', 
 	  'Compiles all of the assets and copies the files to the build directory.', 
