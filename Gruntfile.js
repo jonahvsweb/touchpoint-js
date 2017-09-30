@@ -70,6 +70,12 @@ module.exports = function(grunt) {
           document: true
         }
       }
+    },
+    // Server
+    serve: {
+      options: {
+        port: 9000
+      }
     }
   });
   // Load Tasks
@@ -78,9 +84,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks('grunt-serve');
   // Register Tasks
   grunt.registerTask('es6', ['babel']);
   grunt.registerTask('jsErrors', ['jshint']);
+  grunt.registerTask('server', ['serve']);
   grunt.registerTask(
 	  'build', 
 	  'Compiles all of the assets and copies the files to the build directory.', 
