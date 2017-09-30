@@ -18,7 +18,7 @@ var TouchPoint;
     isSafari: !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/),
     clickTap: ('ontouchstart' in window ? 'touchstart' : 'click'),
     el: 'div', 
-    dom: window, 
+    dom: '', 
     styleEl: '',
     color: '#FFF', 
     opacity: 0.8, 
@@ -27,16 +27,17 @@ var TouchPoint;
     tp: '', 
     z: 9999,
 
-    init: function(el) {
-      TouchPoint.dom = el;
+    init(dom = 'body') {
 
-      TouchPoint
+      this.dom = document.querySelector(dom);
+      
+      this
         .createCss('.tp-init', 
-          'position: relative; width: ' + TouchPoint.size + 'px; height: ' + TouchPoint.size + 'px; background-color: ' + TouchPoint.color + '; opacity: ' + TouchPoint.opacity + '; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ' + TouchPoint.z + ';')
+          `position: relative; width: ${ this.size }px; height: ${ this.size }px; background-color: ${ this.color }; opacity:  ${ this.color }; border-radius: 20px; -ms-transform: scale(0.5); -webkit-transform: scale(0.5); -moz-transform: scale(0.5); -o-transform: scale(0.5); transform: scale(0.5); -ms-transition: all 0.5s ease-out; -webkit-transition: all 0.5s ease-out; -moz-transition: all 0.5s ease-out; -o-transition: all 0.5s ease-out; transition: all 0.5s ease-out; z-index: ${ this.z };`)
         .createCss('.tp-anim', 
-          '-ms-transform: scale(' + TouchPoint.scale + '); -webkit-transform: scale(' + TouchPoint.scale + '); -moz-transform: scale(' + TouchPoint.scale + '); -o-transform: scale(' + TouchPoint.scale + '); transform: scale(' + TouchPoint.scale + '); opacity: 0;'
+          `-ms-transform: scale(${ this.scale }); -webkit-transform: scale(${ this.scale }); -moz-transform: scale(${ this.scale }); -o-transform: scale(${ this.scale }); transform: scale(${ this.scale }); opacity: 0;`
         );
-      TouchPoint.dom.addEventListener(TouchPoint.clickTap, TouchPoint.create, false);
+      this.dom.addEventListener(this.clickTap, this.create, false);
     },
 
     create: function(e) {
