@@ -25,18 +25,18 @@
       </p>
       <h2>Installation</h2>
       <h3>ES5</h3>
-      <p>Download and include <code>touchpoint.js</code> or <code>touchpoint.min.js</code> in the <code>&lt;head&gt;</code> or at the end of the <code>&lt;body&gt;</code> (recommended) in your HTML document. There are no dependencies:</p>
+      <p>Download and include <code>touchpoint-es5.js</code> or <code>touchpoint-es5.min.js</code> in the <code>&lt;head&gt;</code> or at the end of the <code>&lt;body&gt;</code> (recommended) in your HTML document. There are no dependencies:</p>
       <div>
         <pre>
-          &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>touchpoint-es5.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+          &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>dist/touchpoint-es5.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
         </pre>
       </div>
       <h3>ES6</h3>
-      Same instructions as above, but you will need a polyfill to run in-browser. I use <a href="https://www.npmjs.com/package/babel-polyfill" target="_blank" nofollow></a><code>`babel-polyfill`</code> which can be installed on your machine by using NPM from your command line.
+      Same instructions as above, except use <code>touchpoint.js</code> (ES6). You will need a polyfill to run this in-browser. I use <a href="https://www.npmjs.com/package/babel-polyfill" target="_blank" nofollow></a><code>`babel-polyfill`</code> which can be installed on your machine by using NPM from your command line.
       <div>
         <pre>
           &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>node_modules/babel-polyfill/dist/polyfill.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
-          &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>touchpoint.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+          &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>dist/touchpoint.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
         </pre>
       </div>
       <h2>Quick Start/How to Use</h2>
@@ -44,7 +44,7 @@
       <div class="highlight highlight-html">
         <pre>
           <span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;</span>
-          <span class="pl-s1">    TouchPoint.init(<span class="pl-c1">window</span>);</span>
+          <span class="pl-s1">    TouchPoint.init(<span class="pl-c1"></span>);</span>
           <span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span>
         </pre>
       </div>
