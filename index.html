@@ -19,14 +19,23 @@
     </section>
 
    <section class="main-content">
-      <p>A tiny (3.6kb minified) vanilla JavaScript library made for in-browser HTML prototyping (as part of the UX process) that visually shows where the user clicks/taps on-screen using CSS3 transforms and transitions. TouchPoint is highly customizable, mobile ready and great for screencasting, screen recording, user testing and presentations.</p>
+      <p>A tiny (3.86 kb minified) vanilla JavaScript library made for in-browser HTML prototyping (as part of the UX process) that visually shows where the user clicks/taps on-screen using CSS3 transforms and transitions. TouchPoint is highly customizable, mobile ready and great for screencasting, screen recording, user testing and presentations. Library now built for ES6 and ES5. 
       <p>
-        <img src="//camo.githubusercontent.com/1067b6f24c38a419b75c7501887bba2821e1ccfa/687474703a2f2f6a6f6e616876737765622e636f6d2f696e2d7468652d6c61622f6c69622f746f756368706f696e742d6a732f746f756368706f696e742d6a732d696e74726f2e676966" alt="TouchPoint.js in action" title="TouchPoint.js in action" data-canonical-src="http://jonahvsweb.com/in-the-lab/lib/touchpoint-js/touchpoint-js-intro.gif" style="max-width:100%;">
+        <img src="//camo.githubusercontent.com/3bc564aacd6ce91769de55dfbed3da2940fc1738/687474703a2f2f6c69676874686f75736575782e636f6d2f696e2d7468652d6c61622f6c69622f746f756368706f696e742d6a732f746f756368706f696e742d6a732d696e74726f2e676966" alt="TouchPoint.js in action" title="TouchPoint.js in action" data-canonical-src="http://lighthouseux.com/in-the-lab/lib/touchpoint-js/touchpoint-js-intro.gif" style="max-width:100%;">
       </p>
       <h2>Installation</h2>
+      <h3>ES5</h3>
       <p>Download and include <code>touchpoint.js</code> or <code>touchpoint.min.js</code> in the <code>&lt;head&gt;</code> or at the end of the <code>&lt;body&gt;</code> (recommended) in your HTML document. There are no dependencies:</p>
       <div>
         <pre>
+          &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>touchpoint-es5.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+        </pre>
+      </div>
+      <h3>ES6</h3>
+      Same instructions as above, but you will need a polyfill to run in-browser. I use <a href="https://www.npmjs.com/package/babel-polyfill" target="_blank" nofollow></a><code>`babel-polyfill`</code> which can be installed on your machine by using NPM from your command line.
+      <div>
+        <pre>
+          &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>node_modules/babel-polyfill/dist/polyfill.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
           &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>touchpoint.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
         </pre>
       </div>
@@ -40,7 +49,7 @@
         </pre>
       </div>
       <p><strong>That's it!</strong></p>
-      <p><a href="//jonahvsweb.com/in-the-lab/lib/touchpoint-js/basic-demo.html" target="_blank">Start clicking away on the page to see it in action.</a></p>
+      <p><a href="//lighthouseux.com/in-the-lab/lib/touchpoint-js/basic-demo.html" target="_blank">Start clicking away on the page to see it in action.</a></p>
       <h2>Documentation</h2>
       <p>Please view the <a href="//github.com/jonahvsweb/touchpoint-js#options">README file</a> on the Github repo for full documentation of the API.</p>
 <!--
