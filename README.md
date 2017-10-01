@@ -1,15 +1,27 @@
 # TouchPoint.js
 
-A tiny (3.6kb minified) vanilla JavaScript library made for in-browser HTML prototyping (as part of the UX process) that visually shows where the user clicks/taps on-screen using CSS3 transforms and transitions. TouchPoint is highly customizable, mobile ready and great for screencasting, screen recording, user testing and presentations.
+A tiny (3.86 kb minified) vanilla JavaScript library made for in-browser HTML prototyping (as part of the UX process) that visually shows where the user clicks/taps on-screen using CSS3 transforms and transitions. TouchPoint is highly customizable, mobile ready and great for screencasting, screen recording, user testing and presentations. Library now built for ES6 and ES5. 
 
 ![TouchPoint.js in action](http://lighthouseux.com/in-the-lab/lib/touchpoint-js/touchpoint-js-intro.gif "TouchPoint.js in action")
 
 **Live Demo: [View](http://lighthouseux.com/in-the-lab/lib/touchpoint-js/demo.html)**
 
 ## Installation
+
+### ES5
+
 Download and include `touchpoint.js` or `touchpoint.min.js` in the `<head>` or at the end of the `<body>` (recommended) in your HTML document. There are no dependencies:
 
 ```html
+<script src="touchpoint-es5.min.js"></script>
+```
+
+### ES6
+
+Same instructions as above, but you will need a polyfill to run in-browser. I use [`babel-polyfill`](https://www.npmjs.com/package/babel-polyfill) which can be installed on your machine by using NPM from your command line. 
+
+```html
+<script src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
 <script src="touchpoint.min.js"></script>
 ```
 
@@ -18,7 +30,7 @@ After you load the script you simply initialize TouchPoint and add an event list
 
 ```html
 <script>
-	TouchPoint.init(window);
+	TouchPoint.init();
 </script>
 ```
 
@@ -51,14 +63,6 @@ or (recommended)
 TouchPoint.init(elementVarId);
 ```
 
-#### Element
-Change the kind of HTML element that TouchPoint creates. 
-
-Default value: `'div'`
-```html
-TouchPoint.el = 'span';
-```
-
 #### Opacity
 Change the opacity of the TouchPoint. You can use any value between `0` and `1`. 
 
@@ -83,28 +87,23 @@ Default value: `20`
 TouchPoint.size = 5;
 ```
 
-#### zIndex
-Change the zIndex of the TouchPoint. By default it's set at the highest `z-index` depth possible, but you may find the need to change it based on your own prototype. 
-
-Default value: `9999`
-```html
-TouchPoint.z = 500;
-```
-
 ## Performance
 Performance should not be an issue because each individual TouchPoint element is dynamically created and then automatically removed from the DOM after being used. 
 
 The animation is handled via the `requestAnimationFrame` function that is available in all current browsers. This has better overall performance than using `setTimeout`, which doesn't redraw consistently. 
 
 ## Release Notes
+**TouchPoint.js 1.0.1**   
+– Updated to ES6 and reintroduced quick-clicking.   
+
 **TouchPoint.js 1.0**   
 – Initial Release       
 
 *This is in active development.*
 
 ## Roadmap
-- Reintroduce quick clicking.
-- Add keyboard shortcut to enable/disable script.
+- [X] Reintroduce quick clicking.
+- [ ] Add keyboard shortcut to enable/disable script.
 
 ## Feedback
 If you discover any issues please first check [open/past issues](https://github.com/jonahvsweb/touchpoint-js/issues) or [open a new issue](https://github.com/jonahvsweb/touchpoint-js/issues/new) if one does not already exist.
